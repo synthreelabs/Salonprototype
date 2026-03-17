@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SALON PROTOTYPE | Premium Hair Artistry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #121212;
+            --accent: #d4af37;
+            --text: #e0e0e0;
+            --text-dim: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.pexels.com/photos/3992870/pexels-photo-3992870.jpeg?auto=compress&cs=tinysrgb&w=1260');
+            background-size: cover; background-position: center; text-align: center;
+        }
+        .hero-content h1 { font-size: clamp(3rem, 10vw, 6rem); line-height: 1; margin-bottom: 10px; text-transform: uppercase; }
+        .hero-content p { letter-spacing: 5px; color: var(--accent); text-transform: uppercase; font-size: 14px; }
+        .hero-content .subtitle { letter-spacing: 2px; color: var(--text-dim); text-transform: none; font-size: 16px; margin-top: 5px; font-style: italic; font-family: 'Playfair Display', serif;}
+
+        /* ARTISTRY SERVICES */
+        section { padding: 100px 8%; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .service-box { 
+            background: var(--surface); padding: 40px; border: 1px solid rgba(212, 175, 55, 0.1); 
+            text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
+        }
+        .service-box:hover { 
+            transform: scale(1.08) translateY(-15px); 
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+        
+        /* ICON EFFECTS */
+        .service-box i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; transition: 0.5s ease; }
+        .service-box:hover .fa-cut { transform: rotate(-45deg) scale(1.2); }
+        .service-box:hover .fa-palette { transform: rotate(20deg) scale(1.2); }
+        .service-box:hover .fa-wind { transform: translateX(10px); }
+
+        /* THE REVEAL */
+        .reveal-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .reveal-item { width: 45%; min-width: 300px; position: relative; border-radius: 10px; overflow: hidden; }
+        .reveal-item img { width: 100%; height: 500px; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
+        .reveal-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
+        .reveal-label { position: absolute; bottom: 20px; left: 20px; background: var(--accent); color: #000; padding: 5px 15px; font-weight: bold; }
+
+        /* MASTER ARTISTS */
+        .stylist-card { text-align: center; background: var(--surface); padding: 30px; border-radius: 10px; }
+        .stylist-img { 
+            width: 180px; height: 180px; border-radius: 50%; border: 2px solid var(--accent); 
+            margin: 0 auto 20px; overflow: hidden; padding: 5px;
+        }
+        .stylist-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        /* THE LOUNGE (PARALLAX) */
+        .ambience-slider { 
+            height: 450px; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.pexels.com/photos/705255/pexels-photo-705255.jpeg?auto=compress&cs=tinysrgb&w=1260');
+            background-size: cover; background-attachment: fixed; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* THE MENU */
+        .price-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 0; }
+        .price-row span:last-child { color: var(--accent); font-weight: bold; }
+
+        /* BOOKING BUTTON */
+        .booking-tube {
+            position: fixed; bottom: 30px; right: 30px; background: var(--accent);
+            color: #000; padding: 15px 30px; border-radius: 50px; font-weight: bold;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); display: flex; align-items: center; gap: 10px;
+            cursor: pointer; text-decoration: none; z-index: 1000; transition: 0.3s;
+        }
+        .booking-tube:hover { transform: translateY(-5px); background: #fff; }
+
+        @media (max-width: 768px) { .reveal-item { width: 100%; } .ambience-slider { background-attachment: scroll; } }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-content">
+            <p>Sculpting Your Identity</p>
+            <h1>Salon Prototype</h1>
+            <p class="subtitle">a prototype by synthree labs</p>
+            <div style="width: 50px; height: 2px; background: var(--accent); margin: 20px auto;"></div>
+        </div>
+    </div>
+
+    <section id="services">
+        <div style="text-align: center; margin-bottom: 60px;"><h2>Artistry Services</h2></div>
+        <div class="services-grid">
+            <div class="service-box">
+                <i class="fas fa-cut"></i>
+                <h3>Precision Cut</h3>
+                <p>Tailored silhouettes designed to match your face structure.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-palette"></i>
+                <h3>Couture Color</h3>
+                <p>From Balayage to Midnight Onyx, we use luxury pigments.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-wind"></i>
+                <h3>Sculpted Blowout</h3>
+                <p>High-volume, long-lasting styles for your important moments.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="reveal" style="background: var(--surface);">
+        <div style="text-align: center; margin-bottom: 60px;"><h2>The Reveal</h2></div>
+        <div class="reveal-container">
+            <div class="reveal-item">
+                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress" alt="Before After">
+                <div class="reveal-label">Signature Balayage</div>
+            </div>
+            <div class="reveal-item">
+                <img src="https://images.pexels.com/photos/973401/pexels-photo-973401.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Platinum Sculpt">
+                <div class="reveal-label">Platinum Sculpt</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stylists">
+        <div style="text-align: center; margin-bottom: 60px;"><h2>Master Artists</h2></div>
+        <div class="services-grid">
+            <div class="stylist-card">
+                <div class="stylist-img"><img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress" alt="Stylist"></div>
+                <h3>Marcus Vane</h3>
+                <p style="color: var(--accent);">Creative Director</p>
+            </div>
+            <div class="stylist-card">
+                <div class="stylist-img"><img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress" alt="Stylist"></div>
+                <h3>Elena Rose</h3>
+                <p style="color: var(--accent);">Master Colorist</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="ambience-slider">
+        <h2 style="font-size: clamp(2rem, 8vw, 5rem); text-shadow: 2px 2px 20px #000; font-style: italic;">THE LOUNGE</h2>
+    </div>
+
+    <section id="pricing">
+        <div style="text-align: center; margin-bottom: 60px;"><h2>The Menu</h2></div>
+        <div style="max-width: 700px; margin: 0 auto;">
+            <div class="price-row"><span>Director's Cut</span> <span>₹1,500+</span></div>
+            <div class="price-row"><span>Full Head Global Color</span> <span>₹4,500+</span></div>
+            <div class="price-row"><span>Keratin Infusion</span> <span>₹6,000+</span></div>
+            <div class="price-row"><span>Styling & Finish</span> <span>₹800+</span></div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 80px 8% 40px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <h2 style="color: var(--accent); text-transform: uppercase;">Salon Prototype</h2>
+        <div style="margin: 30px 0; color: var(--text-dim); font-size: 14px; line-height: 2.2;">
+            <p><i class="fas fa-map-marker-alt" style="color: var(--accent);"></i> ——— Address Pending ———</p>
+            <p><i class="fas fa-phone" style="color: var(--accent);"></i> ———</p>
+            <p><i class="fas fa-envelope" style="color: var(--accent);"></i> ———</p>
+        </div>
+        <p style="font-size: 11px; margin-top: 20px; color: var(--text-dim); letter-spacing: 2px;">© 2026 SALON PROTOTYPE | BY SYNTHREE LABS</p>
+    </footer>
+
+    <a href="#" class="booking-tube">
+        <i class="fas fa-calendar-alt"></i> BOOK AN APPOINTMENT
+    </a>
+
+</body>
+</html>
